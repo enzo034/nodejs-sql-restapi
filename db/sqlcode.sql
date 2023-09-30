@@ -1,0 +1,19 @@
+CREATE DATABASE IF NOT EXISTS companydb;
+
+USE companydb;
+
+CREATE TABLE employee(
+	id INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR (45) DEFAULT NULL,
+    salary INT(5) DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+
+DESCRIBE employee;
+
+INSERT INTO employee (name, salary)
+	VALUES("Max", 100);
+    
+SELECT * FROM employee;
+
+/* IN ORDER TO COPY AND PASTE IT IN THE WORKBENCH OR CONSOLE */
