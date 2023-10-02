@@ -27,6 +27,40 @@ export const getEmployee = async (req, res) => {
     }
 }
 
+export const getEmployeeBetween = async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM employee WHERE id BETWEEN ? AND ?', [req.params.idf, req.params.ids]);
+
+        if(rows.length <= 0) return res.status(404).json({
+            message: "Employee/s not found"
+        })
+
+        res.send(rows);
+    } catch (error) {
+        return res.status(500).json({
+            message: "Something goes wrong"
+        })
+    }
+}
+
+
+export const getEmployeeByLetter = async (req, res) => {
+    
+    try {
+        console.log(req.params.letter)
+        const [rows] = await pool.query('SELECT * FROM employee WHERE name LIKE CONCAT(?, "%")', [req.params.letter]);
+        if(rows.length <= 0) return res.status(404).json({
+            message: "Employee/s not found"
+        })
+        res.send(rows);
+      } catch (errorType1) {
+        return res.status(500).json({
+            message: "Something goes wrong"
+        })
+      }
+      
+}
+
 export const createEmployees = async (req, res) => {
     const { name, salary } = req.body;
     try {
